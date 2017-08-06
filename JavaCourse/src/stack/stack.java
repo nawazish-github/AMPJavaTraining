@@ -2,10 +2,10 @@ package stack;
 
 import java.util.Scanner;
 
-public class stack {
+public class stack { //it is convention in Java to name classes with initial capital alphabet -- Stack
 	int length;
 	int top;
-	int Array[];
+	int Array[]; // we do not start variable names with capital letter; it should be array[]
 	public static void main(String[] args) {
 		Scanner s=new Scanner(System.in);
 		System.out.println("enter the size");
@@ -62,6 +62,13 @@ public void push(int m)
 	{
 		Array[top]=m;
 		top++;
+		
+		//above assignment and increment order is incorrect; this will overwrite previous top element.
+		//correct code as follows
+		top++;
+		Array[top]=m;
+		// or you can combine the above two lines in one line as follows:
+		Array[++top]=m;
 	}
 	else
 	{
@@ -70,7 +77,9 @@ public void push(int m)
 }
 public int peek()
 {
-	if (top>0)
+	// what if the stack had only one element; in that case the top will be at 0th index
+	// and hence top>0 will always fail (although the stack has one element in it)
+	if (top>0) 
 	{
 		return Array[top-1];
 	}
@@ -82,9 +91,11 @@ public int peek()
  void printstack()
 {
 	 System.out.print("stack elements ");
-for(int i=0;i<Array.length;i++)
+for(int i=0;i<Array.length;i++) 
 {
-	
+	//by looping from 0 to array.length you completely ignored basic stack concept
+	// stack has only one point access to the its underlying data; that is, from the top
+	//think about stack of plate, how can u access 0th element; array[0]
 	System.out.print(Array[i]+" ");
 }
 
